@@ -3,7 +3,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Subject } from 'rxjs';
 import {
   AddChecklistItem,
-  ChecklistItem,
+  ChecklistItem, ResetChecklistItem, ToggleChecklistItem,
 } from '../../shared/interfaces/checklist-item';
 
 export interface ChecklistItemsState {
@@ -24,6 +24,8 @@ export class ChecklistItemService {
 
   // sources
   add$ = new Subject<AddChecklistItem>();
+  toggle$ =  new Subject<ToggleChecklistItem>();
+  reset$ = new Subject<ResetChecklistItem>();
 
   constructor() {
     this.add$.pipe(takeUntilDestroyed()).subscribe((checklistItem) =>
@@ -40,5 +42,25 @@ export class ChecklistItemService {
         ],
       }))
     );
+
+    this.toggle$.pipe(takeUntilDestroyed()).subscribe((checkListItemID) =>
+      this.state.update((state) => ({
+        ...state,
+        checklistItems: state.checklistItems.map((item) =>
+          item.id === checkListItemID
+            ? {...item, checked: !item.checked}
+            : item
+        ),
+      }))
+    );
+
+    this.reset$.pipe(takeUntilDestroyed()).subscribe((checkListId) => 
+      this.state.update((state) => ({
+        ...state,
+        checklistItems: state.checklistItems.map((item) =>
+          item.checklistId === checkListId ? {...item, checked: false} : item
+        ),
+      })
+    ));
   }
 }
