@@ -1,5 +1,5 @@
 import {Component, computed, effect, inject, signal} from '@angular/core';
-import {ChecklistService} from "../shared/data-access/checklist-service";
+import {ChecklistService} from "../shared/data-access/checklist.service";
 import {ActivatedRoute} from "@angular/router";
 import {toSignal} from "@angular/core/rxjs-interop";
 import {ChecklistHeaderComponent} from "./ui/checklist-header.component";
