@@ -1,6 +1,7 @@
 import { KeyValuePipe } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { ButtonDirective } from './button.directive';
 
 @Component({
   standalone: true,
@@ -22,14 +23,14 @@ import { FormGroup, ReactiveFormsModule } from '@angular/forms';
           />
         }
 
-        <footer class="flex gap-4 justify-end p-4">
-          <button (click)="close.emit()">Close</button>
-          <button type="submit">Save</button>
+        <footer class="flex gap-4 justify-end items-center p-4">
+          <button class="w-16 p-1 text-sm" button outlined (click)="close.emit()">Close</button>
+          <button class="w-16 p-1 text-sm" button type="submit">Save</button>
         </footer>
       </form>
     </section>
   `,
-  imports: [ReactiveFormsModule, KeyValuePipe],
+  imports: [ReactiveFormsModule, KeyValuePipe, ButtonDirective],
 })
 export class FormModalComponent {
   @Input({ required: true }) formGroup!: FormGroup;

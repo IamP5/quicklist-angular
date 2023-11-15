@@ -2,27 +2,32 @@ import {Component, effect, inject, signal} from '@angular/core';
 import {ModalComponent} from "../shared/ui/modal.component";
 import {Checklist} from "../shared/interfaces/checklist";
 import {FormBuilder} from "@angular/forms";
-import {FormModalComponent} from "../shared/ui/form-modal.component";
+import {FormModalComponent} from "../shared/ui/forms/form-modal.component";
 import {ChecklistService} from "../shared/data-access/checklist.service";
 import {ChecklistListComponent} from "./ui/checklist-list.component";
+import { ButtonDirective } from '../shared/ui/forms/button.directive';
+import { IconDirective } from '../shared/ui/icon.directive';
 
 @Component({
   standalone: true,
   selector: 'app-home',
   template: `
-    <header class="h-24 w-full flex flex-col self-start justify-center border-b border-b-gray-200">
+    <header class="h-20 w-full flex flex-col self-start justify-center border-b border-b-gray-200">
       <h1 class="text-3xl">Quick Lists</h1>
     </header>
 
-    <section class="h-fit flex flex-col gap-8">
-      <div class="flex gap-4">
+    <section class="h-fit flex flex-col gap-8 p-">
+      <div class="flex gap-4 items-center">
         <button 
-          class="bg-blue-700 rounded p-2 text-white text-sm hover:bg-blue-800" 
+          button 
+          icon="add"
+          iconInvertColor
+          iconSize="1rem"
           (click)="checklistBeingEdited.set({})">
           New Checklist
         </button>
-        <button 
-          class=" rounded p-2 text-sm border border-b-gray-300">
+
+        <button button outlined icon="filter" iconSize="1rem">
           Filters
         </button>
       </div>
@@ -57,18 +62,14 @@ import {ChecklistListComponent} from "./ui/checklist-list.component";
     </app-modal>
   `,
   host: {
-    style: `
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
-      height: 100vh;
-      padding: 2rem 4rem;
-    `
+    class: 'flex flex-col gap-10 h-full w-full py-8'
   },
   imports: [
     ModalComponent,
     FormModalComponent,
-    ChecklistListComponent
+    ChecklistListComponent,
+    ButtonDirective,
+    IconDirective
   ]
 })
 export default class HomeComponent {

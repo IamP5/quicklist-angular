@@ -7,7 +7,7 @@ import {ChecklistItemService} from "./data-access/checklist-item.service";
 import {FormBuilder} from "@angular/forms";
 import {ChecklistItem} from "../shared/interfaces/checklist-item";
 import {ModalComponent} from "../shared/ui/modal.component";
-import {FormModalComponent} from "../shared/ui/form-modal.component";
+import {FormModalComponent} from "../shared/ui/forms/form-modal.component";
 import {ChecklistItemListComponent} from "./ui/checklist-item-list.component";
 
 @Component({
