@@ -1,20 +1,22 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output, inject} from '@angular/core';
 import {Checklist, RemoveChecklist} from "../../shared/interfaces/checklist";
-import {RouterLink} from "@angular/router";
+import {Router, RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-checklist-list',
   standalone: true,
   template: `
-    <ul>
+    <ul class="flex flex-col gap-3">
       @for (checklist of checklists; track checklist.id) {
-        <li>
-          <a routerLink="/checklist/{{ checklist.id }}">
+        <li
+          class="border border-gray-200 p-4 rounded-lg flex justify-between items-center gap-4"
+          (click)="router.navigate(['/checklist', checklist.id])">
+          <h3>
             {{ checklist.title }}
-          </a>
-          <div>
-            <button (click)="edit.emit(checklist)">Edit</button>
-            <button (click)="delete.emit(checklist.id)">Delete</button>
+          </h3>
+          <div class="flex gap-2">
+            <button class="text-xs" (click)="edit.emit(checklist)">Edit</button>
+            <button class="text-xs" (click)="delete.emit(checklist.id)">Delete</button>
           </div>
         </li>
       } @empty {
@@ -28,4 +30,6 @@ export class ChecklistListComponent {
   @Input({ required: true }) checklists!: Checklist[];
   @Output() delete = new EventEmitter<RemoveChecklist>();
   @Output() edit = new EventEmitter<Checklist>();
+
+  router = inject(Router);
 }

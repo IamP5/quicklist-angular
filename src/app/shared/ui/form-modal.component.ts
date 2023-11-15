@@ -6,23 +6,26 @@ import { FormGroup, ReactiveFormsModule } from '@angular/forms';
   standalone: true,
   selector: 'app-form-modal',
   template: `
-    <header>
-      <h2>{{ title }}</h2>
-      <button (click)="close.emit()">close</button>
-    </header>
-    <section>
-      <form [formGroup]="formGroup" (ngSubmit)="save.emit(); close.emit()">
+    <section class="w-96">
+      <form
+        class="flex w-full flex-col gap-4 rounded-lg pg-4 bg-white shadow-md"
+        [formGroup]="formGroup" 
+        (ngSubmit)="save.emit(); close.emit()">
+
         @for (control of formGroup.controls | keyvalue; track control.key){
-          <div>
-            <label [for]="control.key">{{ control.key }}</label>
-            <input
-              [id]="control.key"
-              type="text"
-              [formControlName]="control.key"
-            />
-          </div>
+          <input
+            class="w-full border border-gray-200 rounded p-2"
+            [id]="control.key"
+            type="text"
+            [placeholder]="control.key"
+            [formControlName]="control.key"
+          />
         }
-        <button type="submit">Save</button>
+
+        <footer class="flex gap-4 justify-end p-4">
+          <button (click)="close.emit()">Close</button>
+          <button type="submit">Save</button>
+        </footer>
       </form>
     </section>
   `,

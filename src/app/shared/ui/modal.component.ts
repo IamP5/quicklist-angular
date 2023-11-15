@@ -17,7 +17,17 @@ export class ModalComponent {
 
   @Input() set isOpen(value: boolean) {
     if (value) {
-      this.dialog.open(this.template, { panelClass: 'dialog-container' });
+      this.dialog.open(this.template, {
+        panelClass: [
+          '!absolute', 'w-full', 'h-full',
+          'top-0', 'left-0', 'right-0', 'bottom-0',
+          'flex', 'justify-center', 'items-center',
+        ],
+        backdropClass: [
+          'fixed', 'top-0', 'left-0', 
+          'right-0', 'bottom-0', 'bg-black', 'opacity-50'
+        ],
+      });
     } else {
       this.dialog.closeAll();
     }

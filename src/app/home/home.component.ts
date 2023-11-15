@@ -10,13 +10,23 @@ import {ChecklistListComponent} from "./ui/checklist-list.component";
   standalone: true,
   selector: 'app-home',
   template: `
-    <header>
-      <h1>Quicklists</h1>
-      <button (click)="checklistBeingEdited.set({})">Add Checklist</button>
+    <header class="h-24 w-full flex flex-col self-start justify-center border-b border-b-gray-200">
+      <h1 class="text-3xl">Quick Lists</h1>
     </header>
 
-    <section>
-      <h2>Your checklists</h2>
+    <section class="h-fit flex flex-col gap-8">
+      <div class="flex gap-4">
+        <button 
+          class="bg-blue-700 rounded p-2 text-white text-sm hover:bg-blue-800" 
+          (click)="checklistBeingEdited.set({})">
+          New Checklist
+        </button>
+        <button 
+          class=" rounded p-2 text-sm border border-b-gray-300">
+          Filters
+        </button>
+      </div>
+
       <app-checklist-list 
         [checklists]="checklistService.checklists()" 
         (delete)="checklistService.remove$.next($event)"
@@ -46,6 +56,15 @@ import {ChecklistListComponent} from "./ui/checklist-list.component";
       </ng-template>
     </app-modal>
   `,
+  host: {
+    style: `
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      height: 100vh;
+      padding: 2rem 4rem;
+    `
+  },
   imports: [
     ModalComponent,
     FormModalComponent,
