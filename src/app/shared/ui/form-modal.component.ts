@@ -14,7 +14,7 @@ import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 
         @for (control of formGroup.controls | keyvalue; track control.key){
           <input
-            class="w-full border border-gray-200 rounded p-2"
+            class="w-full border border-gray-200 rounded-t-lg p-2"
             [id]="control.key"
             type="text"
             [placeholder]="control.key"
