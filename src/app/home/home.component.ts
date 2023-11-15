@@ -12,7 +12,7 @@ import { IconDirective } from '../shared/ui/icon.directive';
   standalone: true,
   selector: 'app-home',
   template: `
-    <header class="h-20 w-full flex flex-col self-start justify-center border-b border-b-gray-200">
+    <header class="h-24 w-full flex flex-col self-start justify-center border-b border-b-gray-200">
       <h1 class="text-3xl">Quick Lists</h1>
     </header>
 
@@ -62,7 +62,7 @@ import { IconDirective } from '../shared/ui/icon.directive';
     </app-modal>
   `,
   host: {
-    class: 'flex flex-col gap-10 h-full w-full py-8'
+    class: 'flex flex-col gap-6 h-full w-full py-8'
   },
   imports: [
     ModalComponent,
