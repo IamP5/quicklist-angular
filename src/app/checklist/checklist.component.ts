@@ -22,7 +22,9 @@ import {ChecklistItemListComponent} from "./ui/checklist-item-list.component";
       />
 
       <app-checklist-item-list 
-        [checklistItems]="items()" 
+        [checklistItems]="items()"
+        (delete)="checklistItemService.remove$.next($event)"
+        (edit)="checklistItemBeingEdited.set($event)"
         (toggle)="checklistItemService.toggle$.next($event)"
       />
 
@@ -80,7 +82,12 @@ export default class ChecklistComponent {
 
       if (!checklistItem) {
         this.checklistItemForm.reset();
+        return;
       }
+
+      this.checklistItemForm.patchValue({
+        title: checklistItem.title,
+      });
     });
   }
 }
