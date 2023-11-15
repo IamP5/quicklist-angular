@@ -7,18 +7,14 @@ import {ChecklistService} from "../shared/data-access/checklist.service";
 import {ChecklistListComponent} from "./ui/checklist-list.component";
 import { ButtonDirective } from '../shared/ui/forms/button.directive';
 import { IconDirective } from '../shared/ui/icon.directive';
+import { ListHeaderComponent } from '../shared/ui/list-header.component';
 
 @Component({
   standalone: true,
   selector: 'app-home',
   template: `
-    <header class="h-24 w-full flex flex-col self-start justify-center border-b border-b-gray-200">
-      <h1 class="text-3xl">Quick Lists</h1>
-    </header>
-
-    <section class="h-fit flex flex-col gap-8 p-">
-      <div class="flex gap-4 items-center">
-        <button 
+    <app-list-header title="Quick Lists">
+      <button 
           button 
           icon="add"
           iconInvertColor
@@ -30,8 +26,9 @@ import { IconDirective } from '../shared/ui/icon.directive';
         <button button outlined icon="filter" iconSize="1rem">
           Filters
         </button>
-      </div>
-
+    </app-list-header>
+      
+    <section class="h-fit flex flex-col gap-8 p-">
       <app-checklist-list 
         [checklists]="checklistService.checklists()" 
         (delete)="checklistService.remove$.next($event)"
@@ -68,6 +65,7 @@ import { IconDirective } from '../shared/ui/icon.directive';
     ModalComponent,
     FormModalComponent,
     ChecklistListComponent,
+    ListHeaderComponent,
     ButtonDirective,
     IconDirective
   ]

@@ -24,12 +24,12 @@ import {ChecklistItem, RemoveChecklistItem, ToggleChecklistItem} from "../../sha
         </div>
       </li>
     } @empty {
-      <div>
-        <h2>Add an item</h2>
-        <p>Click the add button to add your first item to this quicklist</p>
-      </div>
+      <h1 class="text-gray-400 h-full w-full grid place-items-center pb-24">You have no items in this Checklist</h1>
     }
   `,
+  host: {
+    class: 'h-full',
+  },
 })
 export class ChecklistItemListComponent {
   @Input({ required: true }) checklistItems!: ChecklistItem[];
