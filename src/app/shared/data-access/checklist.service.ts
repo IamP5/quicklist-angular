@@ -64,7 +64,6 @@ export class ChecklistService {
         checklists: state.checklists.filter((checklist) => checklist.id !== id),
       }))
 
-    // effects
     effect(() => {
       if (this.loaded()) {
         this.storageService.saveChecklists(this.checklists());
