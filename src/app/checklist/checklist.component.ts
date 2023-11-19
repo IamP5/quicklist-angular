@@ -51,10 +51,17 @@ import { IconDirective } from '../shared/ui/icon.directive';
           <app-form-modal
             title="Create item"
             [formGroup]="checklistItemForm"
-            (save)="checklistItemService.add$.next({
-              item: checklistItemForm.getRawValue(),
-              checklistId: checklist?.id!,
-            })"
+            (save)="
+              checklistItemBeingEdited()
+                ? checklistItemService.edit$.next({
+                    id: checklistItemBeingEdited()!.id!,
+                    data: checklistItemForm.getRawValue(),
+                  })
+                : checklistItemService.add$.next({
+                    item: checklistItemForm.getRawValue(),
+                    checklistId: checklist?.id!,
+                  })
+            "
             (close)="checklistItemBeingEdited.set(null)"
           ></app-form-modal>
         </ng-template>
